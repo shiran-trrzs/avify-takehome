@@ -37,7 +37,7 @@ const App = () => {
         resolvedData();
     }, [])
 
-    if (data) {
+    if (!data.length || data == 0 || !data) {
         return (
             <div className="loadingContainer">
                 <div className="loadingSpinner"></div>
