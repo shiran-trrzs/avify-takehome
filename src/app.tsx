@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import ColumnChart from './components/ColumnChart';
 import RadialChart from './components/RadialChart';
 import AreaChart from './components/AreaChart';
+import EnergyTiles from './components/EnergyTiles';
 import './styles.css'
 
 const App = () => {
@@ -24,7 +25,6 @@ const App = () => {
             try {
 
                 const result = await axios.get("https://api.carbonintensity.org.uk/generation")
-                console.log('res', result.data.data);
                 setData([result.data.data]);
 
             } catch (error) {
@@ -37,7 +37,7 @@ const App = () => {
         resolvedData();
     }, [])
 
-    if (!data.length) {
+    if (!data.length || data == 0 || !data) {
         return <div>Loading...</div>;
     }
 
@@ -45,34 +45,37 @@ const App = () => {
     const lastHour = data[0].to.slice(11, 16);
 
     const perc = data[0].generationmix.map((item) => item.perc);
-    const fuel = data[0].generationmix.map((item) => item.fuel.toUpperCase());
+    const fuel = data[0].generationmix.map((item) => item.fuel);
 
-    if (!perc.length) {
-        return <div>Loading...</div>;
-    }
-
-    console.log('perc', perc);
     return (
         <div className="totalContainer">
-            <h1> Last update {lastDate} {lastHour} </h1>
+            <h1> Last update for energy generation {lastDate} {lastHour} </h1>
             <section>
-            <div className="chartContainer">
-                <ColumnChart
-                    perc={perc}
-                    fuel={fuel}
-                />
-            </div>
-            <div className="chartContainer">
-                <RadialChart
-                    perc={perc}
-                    fuel={fuel}
-                />
-            </div>
-            <div className="chartContainer">
-                <AreaChart
-                    data={data[0].generationmix}
-                />
-            </div>
+                <div>
+                    <EnergyTiles
+                        generationMix={data[0].generationmix}
+                    />
+                </div>
+                <div className="sectionContainer">
+                    <div className="chartContainer">
+                        <ColumnChart
+                            perc = { perc }
+                            fuel = { fuel }
+                        />
+                    </div>
+                    <div className="chartContainer">
+                        <RadialChart
+                            perc = { perc }
+                            fuel = { fuel }
+                        />
+                    </div>
+                    <div className="chartContainer">
+                        <AreaChart
+                            generationMix = { data[0].generationmix }
+                        />
+                    </div>
+
+                </div>
             </section>
         </div>
     )
