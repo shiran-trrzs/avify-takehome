@@ -37,8 +37,13 @@ const App = () => {
         resolvedData();
     }, [])
 
-    if (!data.length || data == 0 || !data) {
-        return <div>Loading...</div>;
+    if (data) {
+        return (
+            <div className="loadingContainer">
+                <div className="loadingSpinner"></div>
+                <p>Loading...</p>
+            </div>
+        )
     }
 
     const lastDate = data[0].to.slice(0, 10);
@@ -59,19 +64,19 @@ const App = () => {
                 <div className="sectionContainer">
                     <div className="chartContainer">
                         <ColumnChart
-                            perc = { perc }
-                            fuel = { fuel }
+                            perc={perc}
+                            fuel={fuel}
                         />
                     </div>
                     <div className="chartContainer">
                         <RadialChart
-                            perc = { perc }
-                            fuel = { fuel }
+                            perc={perc}
+                            fuel={fuel}
                         />
                     </div>
                     <div className="chartContainer">
                         <AreaChart
-                            generationMix = { data[0].generationmix }
+                            generationMix={data[0].generationmix}
                         />
                     </div>
 
