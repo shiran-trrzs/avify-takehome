@@ -1,5 +1,11 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    background-color: #f9fafb;
+    color: #1f2937;
+}
+
 h1 {
-    font-family: 'Montserrat', sans-serif;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
     text-transform: uppercase;
     letter-spacing: 2px;
@@ -12,11 +18,66 @@ h1 {
 
 .totalContainer {
     background-color: #f1f1f1;
+    padding: 4%;
+    height: 100%;
 }
+
+.sectionContainer {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 1rem;
+    margin-bottom: 2rem;
+
+}
+
 .chartContainer {
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     border: 1px solid #e1e1e1;
     padding: 16px;
     background-color: #ffffff;
+}
+
+.tilesGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 1rem;
+    margin-bottom: 2rem;
+
+}
+
+.tile {
+    background: #fff;
+    border-radius: 12px;
+    padding: 1rem;
+    text-align: center;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s ease-in-out;
+
+}
+
+.tile:hover, .chartContainer:hover {
+    transform: translateY(-4px);
+
+}
+
+.icon {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+
+}
+
+p {
+    font-weight: bold;
+}
+
+@media (max-width: 480px) {
+    .totalContainer {
+        height: auto;
+    }
+
+    .sectionContainer {
+        display: flex;
+        flex-direction: column;
+    }
 }
